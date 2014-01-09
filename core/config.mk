@@ -341,6 +341,7 @@ BCC_COMPAT := $(HOST_OUT_EXECUTABLES)/bcc_compat$(HOST_EXECUTABLE_SUFFIX)
 DEXOPT := $(HOST_OUT_EXECUTABLES)/dexopt$(HOST_EXECUTABLE_SUFFIX)
 DEXPREOPT := dalvik/tools/dex-preopt
 LINT := prebuilts/sdk/tools/lint
+PULL_LP_BIN := build/tools/pull-lp-bin.py
 
 # ACP is always for the build OS, not for the host OS
 ACP := $(BUILD_OUT_EXECUTABLES)/acp$(BUILD_EXECUTABLE_SUFFIX)
