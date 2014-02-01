@@ -78,3 +78,7 @@ BOARD_FLASH_BLOCK_SIZE := 512
 
 BOARD_SEPOLICY_DIRS += build/target/board/generic/sepolicy
 BOARD_SEPOLICY_UNION += domain.te surfaceflinger.te
+
+TARGET_KERNEL_UBUNTU := true
+TARGET_KERNEL_UBUNTU_META := linux-image-goldfish
+TARGET_KERNEL_UBUNTU_SERIES := trusty
