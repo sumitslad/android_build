@@ -2172,6 +2172,16 @@ function pez {
     return $retval
 }
 
+function updatesystemimg()
+{
+    T=$(gettop)
+    if [ ! "$T" ]; then
+        echo "Couldn't locate the top of the tree.  Try setting TOP." >&2
+        return
+    fi
+    ("$T"/build/tools/update-system-img.sh)
+}
+
 if [ "x$SHELL" != "x/bin/bash" ]; then
     case `ps -o command -p $$` in
         *bash*)
