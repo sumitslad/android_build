@@ -365,18 +365,18 @@ ifeq ($(BUILD_OS),darwin)
 # leave this blank
 HOST_JDK_TOOLS_JAR :=
 else
-HOST_JDK_TOOLS_JAR:= $(shell $(BUILD_SYSTEM)/find-jdk-tools-jar.sh)
-ifeq ($(wildcard $(HOST_JDK_TOOLS_JAR)),)
-$(error Error: could not find jdk tools.jar, please install JDK6, \
-    which you can download from java.sun.com)
-endif
+#HOST_JDK_TOOLS_JAR:= $(shell $(BUILD_SYSTEM)/find-jdk-tools-jar.sh)
+#ifeq ($(wildcard $(HOST_JDK_TOOLS_JAR)),)
+#$(error Error: could not find jdk tools.jar, please install JDK6, \
+#    which you can download from java.sun.com)
+#endif
 endif
 
 # Is the host JDK 64-bit version?
-HOST_JDK_IS_64BIT_VERSION :=
-ifneq ($(filter 64-Bit, $(shell java -version 2>&1)),)
-HOST_JDK_IS_64BIT_VERSION := true
-endif
+#HOST_JDK_IS_64BIT_VERSION :=
+#ifneq ($(filter 64-Bit, $(shell java -version 2>&1)),)
+#HOST_JDK_IS_64BIT_VERSION := true
+#endif
 
 # It's called md5 on Mac OS and md5sum on Linux
 ifeq ($(HOST_OS),darwin)
