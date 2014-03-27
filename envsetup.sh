@@ -167,11 +167,20 @@ function setpaths()
     fi
 
     # Also check for system wide GCC and use it as default if available
-    if [ "$ARCH" == "arm" ]; then
-        if [ -x /usr/bin/arm-linux-androideabi-gcc ]; then
-            export ANDROID_EABI_TOOLCHAIN=/usr/bin
-        fi
-    fi
+    case $ARCH in
+        arm)
+            if [ -x /usr/bin/arm-linux-androideabi-gcc ]; then
+                export ANDROID_EABI_TOOLCHAIN=/usr/bin
+            fi
+            ;;
+        x86)
+            if [ -x /usr/bin/i686-linux-android-gcc ]; then
+                export ANDROID_EABI_TOOLCHAIN=/usr/bin
+            fi
+            ;;
+        *)
+            ;;
+    esac
 
     unset ARM_EABI_TOOLCHAIN ARM_EABI_TOOLCHAIN_PATH
     case $ARCH in
