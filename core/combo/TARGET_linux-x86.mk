@@ -186,8 +186,8 @@ TARGET_CUSTOM_LD_COMMAND := true
 define transform-o-to-shared-lib-inner
 $(hide) $(PRIVATE_CXX) \
 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
-	 -nostdlib -Wl,-soname,$(notdir $@) \
-	 -shared -Bsymbolic \
+	-nostdlib -Wl,-soname,$(notdir $@) \
+	-Wl,-shared,-Bsymbolic \
 	$(TARGET_GLOBAL_CFLAGS) \
 	$(PRIVATE_TARGET_GLOBAL_LD_DIRS) \
 	$(if $(filter true,$(PRIVATE_NO_CRT)),,$(PRIVATE_TARGET_CRTBEGIN_SO_O)) \
@@ -235,6 +235,7 @@ define transform-o-to-static-executable-inner
 $(hide) $(PRIVATE_CXX) \
 	$(PRIVATE_TARGET_GLOBAL_LDFLAGS) \
 	-nostdlib -Bstatic \
+	-Wl,-Bsymbolic \
 	-o $@ \
 	$(PRIVATE_TARGET_GLOBAL_LD_DIRS) \
 	$(if $(filter true,$(PRIVATE_NO_CRT)),,$(PRIVATE_TARGET_CRTBEGIN_STATIC_O)) \
