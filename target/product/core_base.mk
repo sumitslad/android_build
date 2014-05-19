@@ -74,6 +74,9 @@ PRODUCT_PACKAGES += \
     direct_input_test \
     direct_media_test \
     direct_sf_test \
+    direct_ubuntu_application_sensors_c_api_for_hybris_test \
+    direct_ubuntu_application_sensors_for_hybris_test \
+    direct_ubuntu_application_gps_c_api_for_hybris_test \
     libubuntu_application_api \
     ubuntuappmanager \
     upstart-property-watcher
