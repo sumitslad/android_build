@@ -67,6 +67,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     apns-conf.xml \
     libcamera_compat_layer \
+    camera_service \
     libis_compat_layer \
     libmedia_compat_layer \
     libsf_compat_layer \
