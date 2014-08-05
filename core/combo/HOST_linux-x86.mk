@@ -29,8 +29,8 @@ HOST_TOOLCHAIN_PREFIX := /usr/bin
 endif
 # Don't do anything if the toolchain is not there
 ifneq (,$(strip $(wildcard $(HOST_TOOLCHAIN_PREFIX)/gcc)))
-HOST_CC  := $(HOST_TOOLCHAIN_PREFIX)/gcc
-HOST_CXX := $(HOST_TOOLCHAIN_PREFIX)/g++
+HOST_CC  := $(HOST_TOOLCHAIN_PREFIX)/gcc-4.8
+HOST_CXX := $(HOST_TOOLCHAIN_PREFIX)/g++-4.8
 HOST_AR  := $(HOST_TOOLCHAIN_PREFIX)/ar
 endif # $(HOST_TOOLCHAIN_PREFIX)/gcc exists
 
