@@ -81,4 +81,4 @@ BOARD_SEPOLICY_UNION += domain.te surfaceflinger.te
 
 TARGET_KERNEL_UBUNTU := true
 TARGET_KERNEL_UBUNTU_META := linux-image-goldfish
-TARGET_KERNEL_UBUNTU_SERIES := utopic
+TARGET_KERNEL_UBUNTU_SERIES := vivid
