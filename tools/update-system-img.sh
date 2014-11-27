@@ -79,6 +79,9 @@ if [ -z "$SYSIMG" ]; then
 fi
 SYSRAW=${SYSIMG}.raw
 
+# First make sure /data is mounted (not necessarily mounted automatically by recovery)
+do_shell "mount /data"
+
 if [ ! -f "$SYSIMG" ]; then
     echo "Need a valid Android system image path"
     exit 1
