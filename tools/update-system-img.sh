@@ -15,7 +15,9 @@
 # limitations under the License.
 
 MNTPATH="/tmp/update-img"
-USYSIMG="/data/system.img"
+USYSIMG="/data/ubuntu.img"
+SYSTEM="/system"
+ANDROID="/var/lib/lxc/android/system.img"
 SERIAL=$ANDROID_SERIAL
 
 do_shell()
@@ -36,8 +38,6 @@ convert_android_img()
 
 cleanup()
 {
-    do_shell "umount $MNTPATH"
-    do_shell "rmdir $MNTPATH"
     [ -f $SYSRAW ] && rm -f $SYSRAW
 }
 
@@ -75,25 +75,42 @@ fi
 shift $((OPTIND - 1))
 SYSIMG=$@
 if [ -z "$SYSIMG" ]; then
-    SYSIMG=$OUT/system.img
+    if [ -z "$OUT" ]; then
+        SYSIMG=out/target/product/*/system.img
+    else
+        SYSIMG=$OUT/system.img
+    fi
 fi
 SYSRAW=${SYSIMG}.raw
-
-# First make sure /data is mounted (not necessarily mounted automatically by recovery)
-do_shell "mount /data"
 
 if [ ! -f "$SYSIMG" ]; then
     echo "Need a valid Android system image path"
     exit 1
 fi
 
+echo "Pushing android image available at $SYSIMG"
+
 if ! do_shell "ls /sbin/recovery" | grep -q "^/sbin/recovery"; then
     echo "Please make sure the device is attached via USB and in recovery mode"
     exit 1
 fi
 
-if ! do_shell "ls $USYSIMG" | grep -q "^$USYSIMG"; then
-    echo "Couldn't find the Ubuntu Touch system image file ($USYSIMG), aborting"
+echo "Mounting system and data partitions"
+do_shell "mount /data"
+do_shell "mount /system"
+
+echo "Checking first for the ubuntu.img bind-mounted solution"
+if do_shell "ls $USYSIMG" | grep -q "^$USYSIMG"; then
+    do_shell "mkdir -p $MNTPATH"
+    do_shell "mount $USYSIMG $MNTPATH"
+    ANDROIDIMG="$MNTPATH/$ANDROID"
+else
+    echo "Bind mounted ubuntu image not found, looking for the system partition"
+    ANDROIDIMG="$SYSTEM/$ANDROID"
+fi
+
+if ! do_shell "ls $ANDROIDIMG" | grep -q "^$ANDROIDIMG"; then
+    echo "Couldn't find the Android image file ($ANDROIDIMG), aborting"
     exit 1
 fi
 
@@ -101,10 +118,14 @@ echo "Converting android system.img to a valid image format"
 convert_android_img
 
 echo "Copying $SYSRAW to the ubuntu system image"
-do_shell "mkdir -p $MNTPATH"
-do_shell "mount $USYSIMG $MNTPATH"
-do_push $SYSRAW $MNTPATH/var/lib/lxc/android/system.img
-do_shell "umount $MNTPATH"
+do_push $SYSRAW $ANDROIDIMG
+
+if do_shell "ls $MNTPATH" | grep -q "^$MNTPATH"; then
+    do_shell "umount $MNTPATH"
+fi
+
+do_shell "umount /data"
+do_shell "umount /system"
 
 echo "Rebooting device"
 adb $ADBOPTS reboot
