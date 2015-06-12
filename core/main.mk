@@ -448,14 +448,22 @@ subdirs := \
 	build/tools/zipalign \
 	development/tools/emulator/opengl \
 	external/aac \
+	external/ant-wireless/ant_native \
+	external/ant-wireless/ant_service \
+	external/ant-wireless/antradio-library \
 	external/busybox \
 	external/bzip2 \
 	external/checkpolicy \
 	external/e2fsprogs \
+	external/ebtables \
+	external/exfat \
 	external/expat \
+	external/f2fs-tools \
+	external/ffmpeg \
 	external/flac \
 	external/freetype \
 	external/fsck_msdos \
+	external/fuse \
 	external/gcc-demangle \
 	external/genext2fs \
 	external/giflib \
@@ -474,6 +482,7 @@ subdirs := \
 	external/pigz \
 	external/protobuf \
 	external/qemu \
+	external/qrngd \
 	external/scrypt \
 	external/sepolicy \
 	external/sfntly \
@@ -482,6 +491,7 @@ subdirs := \
 	external/speex \
 	external/sqlite \
 	external/stlport \
+	external/stagefright-plugins \
 	external/tinycompress \
 	external/tinyalsa \
 	external/tremolo \
@@ -545,6 +555,8 @@ subdirs += \
 	device/generic \
 	device/lge \
 	device/samsung \
+	device/motorola \
+	device/qcom \
 	vendor/asus \
 	vendor/audience \
 	vendor/broadcom \
@@ -556,7 +568,8 @@ subdirs += \
 	vendor/nxp \
 	vendor/qcom \
 	vendor/samsung \
-	vendor/widevine
+	vendor/widevine \
+	vendor/motorola
 
 # Specific projects for Ubuntu Touch
 subdirs += \
