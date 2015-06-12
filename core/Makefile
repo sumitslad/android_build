@@ -408,7 +408,7 @@ INTERNAL_RAMDISK_FILES := $(filter $(TARGET_ROOT_OUT)/%, \
 	$(ALL_GENERATED_SOURCES) \
 	$(ALL_DEFAULT_INSTALLED_MODULES))
 
-# Default ramdisk comes now from Ubuntu
+# Default ramdisk comes now from http://cdimage.ubuntu.com/ubuntu-touch/daily-preinstalled/current/wily-preinstalled-touch-armhf.tar.gz.zsync
 BUILT_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk.img
 BUILT_RAMDISK_TARGET_ANDROID := $(PRODUCT_OUT)/android-ramdisk.img
 
@@ -443,6 +443,7 @@ $(INSTALLED_RAMDISK_TARGET): $(MKBOOTFS) | $(MINIGZIP)
 	$(hide) mkdir -p $(TARGET_OUT_UBUNTU_INITRD) $(TARGET_UBUNTU_ROOT_OUT)
 	$(hide) $(PULL_LP_BIN) $(TARGET_UBUNTU_INITRD_PKG) -o $(TARGET_OUT_UBUNTU_INITRD) -a $(TARGET_UBUNTU_ARCH) $(TARGET_UBUNTU_INITRD_SERIES)
 	$(hide) dpkg-deb -x $(TARGET_OUT_UBUNTU_INITRD)/$(TARGET_UBUNTU_INITRD_PKG)*.deb $(TARGET_OUT_UBUNTU_INITRD)
+	$(hide) cp -rf $(BOARD_CUSTOM_UBUNTU_INITRD)/* $(TARGET_UBUNTU_ROOT_OUT)
 	$(hide) $(ACP) $(TARGET_UBUNTU_INITRD) $@
 	$(hide) cd $(TARGET_UBUNTU_ROOT_OUT) && $(MINIGZIP) -c -d $@ | cpio -id
 
