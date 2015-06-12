@@ -530,6 +530,7 @@ subdirs := \
 	frameworks/native/opengl \
 	frameworks/native/services \
 	frameworks/opt/emoji \
+	frameworks/opt/connectivity \
 	hardware \
 	prebuilts/tools/linux-x86/sdl \
 	sdk/emulator \
