@@ -408,7 +408,7 @@ INTERNAL_RAMDISK_FILES := $(filter $(TARGET_ROOT_OUT)/%, \
 	$(ALL_GENERATED_SOURCES) \
 	$(ALL_DEFAULT_INSTALLED_MODULES))
 
-# Default ramdisk comes now from http://cdimage.ubuntu.com/ubuntu-touch/daily-preinstalled/current/wily-preinstalled-touch-armhf.tar.gz.zsync
+# Default ramdisk comes now from Ubuntu
 BUILT_RAMDISK_TARGET := $(PRODUCT_OUT)/ramdisk.img
 BUILT_RAMDISK_TARGET_ANDROID := $(PRODUCT_OUT)/android-ramdisk.img
 
@@ -517,7 +517,7 @@ $(INSTALLED_BOOTIMAGE_TARGET_ANDROID): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES_A
 	$(call pretty,"Target boot image for Android: $@")
 	$(hide) $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_ARGS_ANDROID) $(BOARD_MKBOOTIMG_ARGS) --output $@
 	$(hide) $(call assert-max-image-size,$@,$(BOARD_BOOTIMAGE_PARTITION_SIZE),raw)
-
+ 
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES)
 	$(call pretty,"Target boot image for Ubuntu Touch: $@")
 	$(hide) $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $@
@@ -913,6 +913,10 @@ ifneq ($(BOARD_NAND_SPARE_SIZE),)
 mkyaffs2_extra_flags += -s $(BOARD_NAND_SPARE_SIZE)
 else
 BOARD_NAND_SPARE_SIZE := 64
+endif
+
+ifdef BOARD_CUSTOM_BOOTIMG_MK
+include $(BOARD_CUSTOM_BOOTIMG_MK)
 endif
 
 ifdef BOARD_CUSTOM_BOOTIMG_MK
@@ -1768,7 +1772,6 @@ INTERNAL_EMULATOR_PACKAGE_FILES += \
 		$(INSTALLED_QEMU_KERNEL_TARGET) \
 		$(INSTALLED_RAMDISK_TARGET) \
 		$(recovery_ramdisk) \
-		$(INSTALLED_RAMDISK_TARGET_ANDROID) \
 		$(INSTALLED_SYSTEMIMAGE) \
 		$(INSTALLED_USERDATAIMAGE_TARGET)
 

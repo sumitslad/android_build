@@ -60,8 +60,9 @@ PRODUCT_PACKAGES += \
     requestsync \
     screenrecord \
     telephony-common \
+    voip-common \
     recovery_resize2fs \
-    voip-common
+    telephony-msim
 
 # for Ubuntu Touch (hybris, platform-api, utils, etc)
 PRODUCT_PACKAGES += \
