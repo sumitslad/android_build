@@ -556,6 +556,7 @@ subdirs += \
 	device/generic \
 	device/lge \
 	device/samsung \
+	device/sony \
 	device/motorola \
 	device/qcom \
 	vendor/asus \
@@ -569,6 +570,7 @@ subdirs += \
 	vendor/nxp \
 	vendor/qcom \
 	vendor/samsung \
+	vendor/sony \
 	vendor/widevine \
 	vendor/motorola
 
